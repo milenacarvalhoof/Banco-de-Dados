@@ -1,0 +1,15 @@
+--mostra os bancos
+show dbs
+
+--usar um banco mesmo que não tenha criado
+use nomedobanco
+
+--criar collection (tabela)
+db.createCollection('estados') --nosql é sensitive case, maiusculas diferenciam de minusculas
+
+--mostra as collections (tabelas)
+show collections
+
+--exclui collection
+db.nomedacollection.drop()
+

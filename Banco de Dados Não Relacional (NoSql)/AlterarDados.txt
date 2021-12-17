@@ -1,0 +1,17 @@
+--alterar São Paulo inserindo a populacao
+db.estados.update(
+    {sigla: "SP"}, 
+    {$set: {populacao: 45340000}}
+)
+
+--alterar array de dados
+db.estados.update(
+    {sigla: "AL"},
+    {$set: {cidades: [{nome: "Sergipe"}]}}
+) 
+
+--usando push adciona e não altera os existentes
+db.estados.update(
+    {sigla: "SP"}, 
+    {$push: {cidades: {nome: "Santos", populacao: 433966}}}
+)

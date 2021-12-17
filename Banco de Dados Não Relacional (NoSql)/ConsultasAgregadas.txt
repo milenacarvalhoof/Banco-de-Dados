@@ -1,0 +1,24 @@
+--consultar estados, e nomes das cidades de cada estado
+db.estados.aggregate([
+    {$project: {nome: 1, "cidades.nome": 1, _id: 0}}
+])
+
+-- consultar sigla dos estados e a soma da populacao das cidades
+db.estados.aggregate([
+    {$project: {populacao: {$sum: "$cidades.populacao"}, sigla: 1, _id: 0}},
+    { $group: {_id: null, populacaoTotal: {$sum: "$populacao" }} },
+])
+
+-- consultar soma total da populacao
+db.estados.aggregate([
+    {$project: {populacao: {$sum: "$cidades.populacao"}, sigla: 1, _id: 0}},
+    { $group: {_id: null, populacaoTotal: {$sum: "$populacao" }} },
+])
+
+-- consultar a soma total da populacao sem o _id
+db.estados.aggregate([
+    {$project: {populacao: {$sum: "$cidades.populacao"}, sigla: 1, _id: 0}},
+    { $group: {_id: null, populacaoTotal: {$sum: "$populacao" }} },
+    { $project: { _id: 0, populacaoTotal: 1} }
+])
+

@@ -1,0 +1,38 @@
+--consultar// pode usar filtro
+db.estados.find()
+
+--consultar com formatação json
+db.estados.find().pretty()
+
+--consultar só o primeiro registro
+db.estados.findOne()
+
+--consultar 1 registro com filtro 
+db.estados.findOne({sigla: 'RJ'})
+
+--consultar registros que tenham sigla RJ ou AC
+db.estados.find({$or: [{sigla:'RJ'}, {sigla: 'AC'}]}).pretty()
+
+--consultar registros que tenham as siglas RJ e AC ao mesmo tempo  
+db.estados.find({$and: [{sigla:'RJ'}, {sigla: 'AC'}]}).pretty()
+
+--consultar registros que possuem o atributo populacao
+db.estados.find({populacao: {$exists: true}}).pretty()
+
+--consultar pulando o primeiro
+db.estados.find().skip(1)
+
+--consultar com limite de 2 registros / pode usar junto com o skip
+db.estados.find().limit(2)
+
+--mostrar a quantidade de registros
+db.estados.count()
+
+--consultar que mostra só 1º nome e 1ª sigla e sem _id
+db.estados.find({sigla: 'SP'}, {nome: 1, sigla: 1, _id: 0})
+
+--consultar só o nome das cidades de SP
+db.estados.find({sigla: "SP"}, {"cidades.nome": 1, _id: 0})
+
+--consultar quais estados possuem atributo populacao
+db.estados.find({populacao: {$exists: true}}, {_id: 0, nome: 1}).pretty()

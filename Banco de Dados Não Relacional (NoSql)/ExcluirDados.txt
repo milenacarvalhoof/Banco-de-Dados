@@ -1,0 +1,8 @@
+--excluir estado Acre
+db.estados.remove({sigla: "AC"})
+
+--excluir 1 estado que tem atributo populacao
+db.estados.remove({populacao: {$exists: true}}, 1)
+
+--excluir estados que possuem populacao menor que 20 milhoes
+db.estados.remove({populacao: {$lt: 20000000}})

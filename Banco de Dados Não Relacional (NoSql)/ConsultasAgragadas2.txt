@@ -1,0 +1,26 @@
+--consultar estado que tenha a cidade sorocaba
+db.estados.aggregate([
+    { $match: {"cidades.nome": "Sorocaba"} }
+]).pretty()
+
+--consultar estado que tenha a cidade sorocaba e separar as cidades
+db.estados.aggregate([
+    { $match: {"cidades.nome": "Sorocaba"} },
+    { $unwind: "$cidades"},
+]).pretty()
+
+--consultar estado que tenha a cidade sorocaba, separar as cidades, e mostrar só a cidade sorocaba
+db.estados.aggregate([
+    { $match: {"cidades.nome": "Sorocaba"} },
+    { $unwind: "$cidades"},
+    { $match: {"cidades.nome": "Sorocaba"} },
+]).pretty()
+
+--consultar estado que tenha a cidade sorocaba, separar as cidades, e mostrar só _id da cidade sorocaba
+db.estados.aggregate([
+    { $match: {"cidades.nome": "Sorocaba"} },
+    { $unwind: "$cidades"},
+    { $match: {"cidades.nome": "Sorocaba"} },
+    { $project: {_id: "$cidades._id"}}
+]).pretty()
+
